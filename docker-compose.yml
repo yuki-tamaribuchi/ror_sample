@@ -1,0 +1,32 @@
+version: "3"
+
+services:
+  ruby:
+    build: 
+      context: .
+      dockerfile: .docker/Dockerfile
+      args: 
+        - USER_ID=${USER_ID}
+        - USER_NAME=${USER_NAME}
+        - GROUP_ID=${GROUP_ID}
+        - GROUP_NAME=${GROUP_NAME}
+    volumes:
+      - ./Gemfile:/Gemfile
+      - ./Gemfile.lock:/Gemfile.lock
+      - ./src:/src
+    command: bash -c "bundle install && /bin/bash"
+    tty: true
+    depends_on:
+      - db
+
+
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+    ports:
+      - 3306:3306
+    volumes:
+      - ./mysql:/var/lib/mysql
+      - ./sql:/docker-entrypoint-initdb.d
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci

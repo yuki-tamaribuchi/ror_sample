@@ -1,0 +1,8 @@
+{
+	"name":"ror_sample",
+	"dockerComposeFile": [
+		"../docker-compose.yml"
+	],
+	"service": "ruby",
+	"workspaceFolder": "/src"
+}
