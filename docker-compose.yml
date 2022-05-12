@@ -11,10 +11,7 @@ services:
         - GROUP_ID=${GROUP_ID}
         - GROUP_NAME=${GROUP_NAME}
     volumes:
-      - ./Gemfile:/Gemfile
-      - ./Gemfile.lock:/Gemfile.lock
       - ./src:/src
-    command: bash -c "bundle install && /bin/bash"
     tty: true
     depends_on:
       - db

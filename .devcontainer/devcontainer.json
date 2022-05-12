@@ -4,5 +4,5 @@
 		"../docker-compose.yml"
 	],
 	"service": "ruby",
-	"workspaceFolder": "/src"
+	"workspaceFolder": "/src/blog"
 }
