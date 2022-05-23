@@ -1,0 +1,17 @@
+<%= content_for :content do %>
+<% if @message %>
+<%= @message %>
+<% end %>
+<%= form_with model: @users do |form| %>
+	<%= form.label :username, "ユーザーネーム: " %>
+	<%= form.text_field :username %>
+	<% if @user.errors.include?(:username) %>
+		<%= @user.errors.full_messages_for(:username).first %>
+	<% end %>
+	<br>
+	<%= form.label :password, "パスワード: " %>
+	<%= form.password_field :password %>
+	<br>
+	<%= form.submit "ログイン" %>
+<% end %>
+<% end %>

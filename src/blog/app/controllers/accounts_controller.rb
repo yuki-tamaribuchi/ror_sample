@@ -12,4 +12,30 @@ class AccountsController < ApplicationController
 			end
 		end
 	end
+
+	def login
+		if request.get? then
+			@user = User.new()
+			render "login"
+		elsif request.post? then
+			@user = User.find_by(username: params[:username])
+			if @user == nil then
+				login_error
+			end
+
+			if @user.authenticate(params[:password]) then
+				set_current_user_to_cookie(@user)
+			else
+				login_error
+			end
+
+			redirect_to controller: "accounts", action: "detail", username: @user.username
+		end
+	end
+
+
+	def logout
+		unset_current_user_from_cookie
+		redirect_to controller: "accounts", action: "login"
+	end
 end
