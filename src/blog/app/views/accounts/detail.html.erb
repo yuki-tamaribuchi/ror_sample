@@ -1,0 +1,15 @@
+<%= content_for :content do %>
+<h2><%= @user.username %></h2>
+
+<h3>自己紹介</h3>
+<% if @user.biograph == "" || @user.biograph == nil %>
+自己紹介はありません。
+<% else %>
+<%= @user.biograph %>
+<% end %>
+<br>
+<% if current_user_id == @user.id %>
+<%= link_to "プロフィール更新", controller: "accounts", action: "update" %>
+<%= link_to "退会", controller: "accounts", action: "delete" %>
+<% end %>
+<% end %>

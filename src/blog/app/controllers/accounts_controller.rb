@@ -38,4 +38,14 @@ class AccountsController < ApplicationController
 		unset_current_user_from_cookie
 		redirect_to controller: "accounts", action: "login"
 	end
+
+	
+	def detail
+		@user = User.find_by(username: params[:username])
+		if @user == nil then
+			return render_not_found
+		end
+
+		render "detail"
+	end
 end
