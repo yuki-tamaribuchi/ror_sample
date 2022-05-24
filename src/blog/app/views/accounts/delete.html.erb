@@ -1,0 +1,6 @@
+<%= content_for :content do %>
+<h2>退会しますか？</h2>
+<%= form_with model: @users do |form| %>
+	<%= button_to "退会", method: :delete %>
+<% end %>
+<% end %>

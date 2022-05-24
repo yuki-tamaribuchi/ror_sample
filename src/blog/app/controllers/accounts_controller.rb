@@ -65,4 +65,15 @@ class AccountsController < ApplicationController
 		end
 			
 	end
+
+	def delete
+		@user = get_current_user
+		if request.get? then
+			render "delete"
+		elsif request.post? then
+			@user.delete
+			unset_current_user_from_cookie
+			redirect_to controller: "accounts", action: "signup"
+		end
+	end
 end
