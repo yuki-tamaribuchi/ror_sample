@@ -48,4 +48,21 @@ class AccountsController < ApplicationController
 
 		render "detail"
 	end
+
+	
+	def update
+		@user = get_current_user
+		
+		if @user == nil then
+		end
+
+		if request.get? then
+			render "update"
+		elsif request.post? then
+			@user.biograph = params[:biograph]
+			@user.save()
+			redirect_to controller: "accounts", action: "detail", username: @user.username
+		end
+			
+	end
 end

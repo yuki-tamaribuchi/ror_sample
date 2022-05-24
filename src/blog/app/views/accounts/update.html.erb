@@ -1,0 +1,10 @@
+<%= content_for :content do %>
+<% if @message %>
+<%= @message %>
+<% end %>
+<%= form_with model: @users do |form| %>
+	<%= form.label :biograph, "自己紹介: " %>
+	<%= form.text_field :biograph, value: @user.biograph  %>
+	<%= form.submit "更新" %>
+<% end %>
+<% end %>
