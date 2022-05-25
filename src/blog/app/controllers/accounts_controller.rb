@@ -76,4 +76,29 @@ class AccountsController < ApplicationController
 			redirect_to controller: "accounts", action: "signup"
 		end
 	end
+
+	private
+	def user_params_with_confirmation
+		params.permit(:username, :password, :password_confirmation)
+	end
+
+	def login_error
+		@user = User.new()
+		@message = "ユーザネームかパスワードが間違っています。"
+		render "login"
+	end
+
+	def get_current_user
+		User.find_by(id: cookies.signed['user_id'])
+	end
+
+	def set_current_user_to_cookie(user)
+		cookies.signed[:user_id] = user.id
+		cookies.signed[:username] = user.username
+	end
+
+	def unset_current_user_from_cookie
+		cookies.delete :user_id
+		cookies.delete :username
+	end
 end
