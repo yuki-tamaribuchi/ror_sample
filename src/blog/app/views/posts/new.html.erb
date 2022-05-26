@@ -1,0 +1,17 @@
+<%= content_for :content do %>
+<%= form_with model: @post do |form| %>
+	<%= form.label :title, "タイトル: " %>
+	<%= form.text_field :title %>
+	<% if @post.errors.include?(:title) %>
+		<%= @post.errors.full_messages_for(:title).first %>
+	<% end %>
+	<br>
+	<%= form.label :content, "内容: " %>
+	<%= form.text_field :content %>
+	<% if @post.errors.include?(:content) %>
+		<%= @post.errors.full_messages_for(:content).first %>
+	<% end %>
+	<br>
+	<%= form.submit "投稿" %>
+<% end %>
+<% end %>
