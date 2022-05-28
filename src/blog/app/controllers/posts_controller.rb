@@ -19,4 +19,8 @@ class PostsController < ApplicationController
 			post.save()
 		end
 	end
+
+	def show
+		@post = Post.includes(:user).find(params[:id])
+	end
 end

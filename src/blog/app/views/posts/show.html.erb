@@ -1,0 +1,14 @@
+<%= content_for :content do %>
+<h2><%= @post.title %></h2>
+<%= @post.content %>
+<br>
+<% if current_user_id == @post.user.id %>
+<%= link_to "編集", controller: "posts", action: "edit", id: @post.id %>
+<%= link_to "削除", controller: "posts", action: "destroy_confirm", id: @post.id %>
+<% end %>
+<br><br>
+<h3>投稿者</h3>
+<%= link_to "#{@post.user.username}", controller: "accounts", action: "detail", username: "#{@post.user.username}" %>
+<br>
+<%= @post.user.biograph %>
+<% end %>
