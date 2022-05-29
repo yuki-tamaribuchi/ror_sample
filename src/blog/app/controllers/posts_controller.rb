@@ -44,4 +44,29 @@ class PostsController < ApplicationController
 			redirect_to controller: "posts", action: "show", id: post.id
 		end
 	end
+
+
+	def destroy_confirm
+		@post = Post.find(params[:id])
+
+		if @post.user_id != cookies.signed[:user_id]
+			return render_forbidden
+		end
+	end
+
+
+	def destroy
+		post = Post.find(params[:id])
+		if post.user_id != cookies.signed[:user_id]
+			return render_forbidden
+		end
+
+		post.delete()
+		redirect_to controller: "accounts", action: "detail", username: cookies.signed[:username]
+	end
+
+	private
+	def category_params
+		params.require(:post).permit(categories: [])
+	end
 end

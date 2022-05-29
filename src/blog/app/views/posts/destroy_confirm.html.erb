@@ -1,0 +1,6 @@
+<%= content_for :content do %>
+<h3><%= @post.title %>を削除しますか？</h3>
+<%= form_with model: @post do |form| %>
+	<%= button_to "削除", controller: "posts", action: "destroy", id: @post.id,  method: :delete %>
+<% end %>
+<% end %>
